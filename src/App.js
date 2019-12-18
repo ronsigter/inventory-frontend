@@ -1,26 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Products from './components/users/products/'
+import { getLocalData } from './helpers/LocalStorage'
+import strings from './helpers/Strings'
 
-function App() {
+export default () => {
+  if(!getLocalData(strings.USER_TOKEN)) window.location = `/login`
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Products/>
+  )
 }
-
-export default App;
