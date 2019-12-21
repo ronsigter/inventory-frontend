@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
-import client from '../config/apolloClient'
+import client from '../../config/apolloClient'
 
 export const LOGIN_USER = gql`
 mutation login($email: String!, $password: String!){
