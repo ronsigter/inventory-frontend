@@ -1,0 +1,28 @@
+@media all and (min-width: 480px) {
+  .login-container {
+    padding: 60px 0;
+  }
+
+  .login-container form {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0 auto;
+    max-width: 320px;
+
+    .ant-input-affix-wrapper {
+      margin-bottom: 16px;
+    }
+
+    > .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    > .header .anticon svg {
+      height: 56px;
+      width: 48px;
+    }
+  }
+}

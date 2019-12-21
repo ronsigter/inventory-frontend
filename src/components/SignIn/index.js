@@ -1,4 +1,5 @@
 import React from 'react'
+import './login.scss'
 import { Input, Icon, Button } from 'antd'
 import { useLoginForm } from '../../forms/useLoginForm'
 import loginUser from '../../GraphQL/mutation/loginUser'
@@ -15,7 +16,7 @@ const SignIn = (props) => {
       const loginData = result.data.login
       if(loginData.user && loginData.status === "authorized"){
         loginThisUser(loginData.user)
-        props.history.push('/dashboard')
+        props.history.push('/')
       } else {
         console.log("Invalid email or password!")
       }
@@ -28,15 +29,19 @@ const SignIn = (props) => {
   })
 
   return (
-    <div>
-      <h1>Sign In</h1>
+    <div className="login-container">
       <form onSubmit={handleSubmit}>
+        <div className="header">
+          <Icon type="rocket"/>
+          <p>Inventory System</p>
+        </div>
         <Input
           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
           placeholder="email"
           value={values.email}
           name="email"
           onChange={handleChange}
+          required
         />
         <Input
           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -45,8 +50,9 @@ const SignIn = (props) => {
           value={values.password}
           name="password"
           onChange={handleChange}
+          required
         />
-        <Button type="primary" htmlType="submit">Login</Button>
+        <Button type="primary" size="large" block={true} htmlType="submit">Login</Button>
       </form>
     </div>
   )
