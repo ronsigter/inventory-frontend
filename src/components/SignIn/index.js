@@ -1,13 +1,14 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import './login.scss'
-import { Input, Icon, Button } from 'antd'
+import { Input, Icon, Button, Alert } from 'antd'
 import { useLoginForm } from '../../forms/useLoginForm'
 import loginUser from '../../GraphQL/mutation/loginUser'
 import { loginThisUser } from '../../utils'
 
 const SignIn = (props) => {
-  const { login } = loginUser()
 
+  const [show, setShow] = useState(false)
+  const { login } = loginUser()
   const handleLogin = (values) => {
     login({ variables: {
       email: values.email,
@@ -18,7 +19,10 @@ const SignIn = (props) => {
         loginThisUser(loginData.user)
         props.history.push('/')
       } else {
-        console.log("Invalid email or password!")
+        setShow(true)
+        setTimeout(() => {
+          setShow(false);
+        }, 3000);
       }
     })
   }
@@ -31,6 +35,11 @@ const SignIn = (props) => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
+        {
+          show ?
+            <Alert banner message="Email or Password is incorrect" type="error" showIcon/>
+            : null
+        }
         <div className="header">
           <Icon type="rocket"/>
           <p>Inventory System</p>

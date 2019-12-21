@@ -8,6 +8,10 @@ export const logoutThisUser = () => {
   localStorage.removeItem(strings.LOGIN_DATA)
 }
 
+export const userDetails = () => {
+  return JSON.parse(localStorage.getItem(strings.LOGIN_DATA))
+}
+
 export const isLogin = () => {
   if (localStorage.getItem(strings.LOGIN_DATA)) {
     return true

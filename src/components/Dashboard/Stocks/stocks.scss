@@ -1,0 +1,19 @@
+@media all and (min-width: 480px) {
+  .stocks-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    > .left {
+      width: 100%;
+    }
+
+    > .right {
+      width: 50%;
+    }
+  }
+
+  .table {
+    padding-right: 32px;
+  }
+}
