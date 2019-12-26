@@ -6,6 +6,8 @@ let reducer = (state, action) => {
       return { ...state, ...action.payload }
     case "updateSelected":
       return { ...state, selectedProduct: action.payload }
+    case "updateSearch":
+      return { ...state, searchTerm: action.payload}
     default:
       return
   }
@@ -14,7 +16,8 @@ let reducer = (state, action) => {
 const initialState = {
   loading: true,
   products: [],
-  selectedProduct: {}
+  selectedProduct: {},
+  searchTerm: ""
 }
 
 const StateContext = createContext(initialState)

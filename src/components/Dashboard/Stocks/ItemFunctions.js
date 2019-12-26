@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Button, Input, Modal, Form } from 'antd'
 import addProduct from '../../../GraphQL/mutation/addProduct'
+import SearchProduct from './SearchProduct'
+
 import { useAddProductForm } from '../../../forms/useAddProductForm'
 import { StateContext } from '../Context'
-
-const { Search} = Input
 
 const ItemFunctions = () => {
   const [visible, setVisible] = useState(false)
@@ -60,11 +60,7 @@ const ItemFunctions = () => {
 
   return (
     <div className="stock-functions">
-      <Search
-        placeholder="Search Product"
-        onSearch={value => console.log(value)}
-        style={{ width: '50%' }}
-      />
+      <SearchProduct/>
       <Button
         type="primary"
         onClick={() => setVisible(true)}

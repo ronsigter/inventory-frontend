@@ -27,6 +27,12 @@ export default () => {
     }
   ]
 
+  const products = state.products.filter(
+    (product) => {
+      return product.title.toLowerCase().indexOf(state.searchTerm.toLowerCase()) !== -1
+    }
+  )
+
   return (
     <div className="table">
       <Table
@@ -34,7 +40,7 @@ export default () => {
         rowKey="id"
         bordered={true}
         columns={columns}
-        dataSource={state.products}
+        dataSource={products}
         loading={state.loading}
         onRow={(record) => {
           return {
