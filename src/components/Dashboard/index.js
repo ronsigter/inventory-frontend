@@ -29,7 +29,7 @@ const Dashboard = () => {
   return (
     <StateProvider>
       {login ?
-        <Layout className="dashboard-container">
+        <Layout className="dashboard-container" style={{height:"100vh"}}>
           <Header>
             <Menu
               theme="dark"

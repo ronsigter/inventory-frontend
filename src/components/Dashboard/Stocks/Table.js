@@ -30,7 +30,9 @@ export default () => {
   return (
     <div className="table">
       <Table
+        size="middle"
         rowKey="id"
+        bordered={true}
         columns={columns}
         dataSource={state.products}
         loading={state.loading}

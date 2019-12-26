@@ -3,6 +3,7 @@ import './stocks.scss'
 
 import Table from './Table'
 import ItemData from './ItemData'
+import ItemFunctions from './ItemFunctions'
 
 import { StateContext } from '../Context'
 import getAllProducts from '../../../GraphQL/query/getAllProducts'
@@ -26,6 +27,7 @@ const Stocks = () => {
   return (
     <div className="stocks-container">
       <div className="left">
+        <ItemFunctions/>
         <Table/>
       </div>
       <div className="right">
