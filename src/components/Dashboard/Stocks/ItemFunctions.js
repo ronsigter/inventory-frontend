@@ -14,7 +14,6 @@ const ItemFunctions = () => {
   const { AddProduct } = addProduct()
 
   const handleAddProduct = (values) => {
-    console.log(values)
     setLoading(true)
     AddProduct({ variables: {
       title: values.title,

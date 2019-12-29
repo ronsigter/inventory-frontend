@@ -38,7 +38,7 @@ const Dashboard = () => {
               style={{ lineHeight: '64px' }}
             >
               <Menu.Item key="stocks" onClick={handleChangeTab}>View Stocks</Menu.Item>
-              <Menu.Item key="order" onClick={handleChangeTab}>Create Order</Menu.Item>
+              <Menu.Item key="order" onClick={handleChangeTab}>View Order</Menu.Item>
               <Menu.Item key="dr" onClick={handleChangeTab}>Process DR</Menu.Item>
               <SubMenu
                 title={
@@ -63,7 +63,7 @@ const Dashboard = () => {
               }
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Inventory System ©2020 Created by Tumetechnic</Footer>
+          {/* <Footer style={{ textAlign: 'center' }}>Inventory System ©2020 Created by Tumetechnic</Footer> */}
         </Layout>
         : <Redirect to ='/signin'/>
       }

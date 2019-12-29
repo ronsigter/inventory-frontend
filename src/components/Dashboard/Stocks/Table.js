@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { StateContext } from '../Context'
 
-import { Table } from 'antd'
+import { Table, Button, Icon } from 'antd'
 
 export default () => {
   const { state, dispatch } = useContext(StateContext)
@@ -11,12 +11,16 @@ export default () => {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
-      render: title => <a onClick={ () => {
-        console.log()
-      }}>{title}</a>,
+      render: (text, record) => <a onClick={ () => {
+        dispatch({
+          type: "updateSelectedProduct",
+          payload: record
+        })
+      }}>{record.title}</a>,
+      // ellipsis: true
     },
     {
-      title: 'Quantity',
+      title: 'Stock',
       dataIndex: 'quantity',
       key: 'quantity',
     },
@@ -24,6 +28,28 @@ export default () => {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
+      render: (text, record) =>
+        <span>
+          ₱ {record.price.toFixed(2)}
+        </span>
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Button style={{backgroundColor: "#EFAF41"}} type="primary" onClick={() => {
+          const cart = state.cart
+          cart.push({...record, orderQuantity: 1})
+          dispatch({
+            type: "updateCart",
+            payload: cart
+          })
+        }}>Add to order
+          <Icon type="shopping-cart" />
+        </Button>
+      ),
+      align: 'center',
+      width: 100
     }
   ]
 
@@ -42,16 +68,7 @@ export default () => {
         columns={columns}
         dataSource={products}
         loading={state.loading}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              dispatch({
-                type: "updateSelected",
-                payload: record
-              })
-            }
-          }
-        }}
+        pagination={{ pageSize: 9 }}
       />
     </div>
   )

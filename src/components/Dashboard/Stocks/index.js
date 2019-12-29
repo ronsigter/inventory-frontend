@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import './stocks.scss'
 
 import Table from './Table'
-import ItemData from './ItemData'
 import ItemFunctions from './ItemFunctions'
+import Order from '../Order'
 
 import { StateContext } from '../Context'
 import getAllProducts from '../../../GraphQL/query/getAllProducts'
@@ -31,7 +31,7 @@ const Stocks = () => {
         <Table/>
       </div>
       <div className="right">
-        <ItemData/>
+        <Order/>
       </div>
     </div>
   )

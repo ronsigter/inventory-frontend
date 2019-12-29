@@ -1,0 +1,38 @@
+@media all and (min-width: 480px) {
+  .receipt-container {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      @extend .receipt-container;
+      align-items: center;
+    }
+
+    .date-container {
+      @extend .receipt-container;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delivery {
+      @extend .receipt-container;
+      .details {
+        @extend .receipt-container;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  input {
+    text-align: right;
+  }
+}
