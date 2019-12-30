@@ -14,6 +14,8 @@ let reducer = (state, action) => {
       return { ...state, stores: action.payload}
     case "updateSelectedStore":
       return { ...state, selectedStore: action.payload}
+    case "updateInvoices":
+      return { ...state, invoices: action.payload}
     default:
       return
   }
@@ -26,7 +28,8 @@ const initialState = {
   searchTerm: "",
   cart: [],
   stores: [],
-  selectedStore: {}
+  selectedStore: {},
+  invoices: []
 }
 
 const StateContext = createContext(initialState)

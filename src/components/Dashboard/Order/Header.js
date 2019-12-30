@@ -1,10 +1,15 @@
-import React, { useContext } from 'react'
-import { Input, AutoComplete } from 'antd'
+import React, { useState, useContext } from 'react'
+import { Input, AutoComplete, Button, Icon, Modal } from 'antd'
 import { StateContext } from '../Context'
+import { useAddInvoiceForm } from '../../../forms/useAddInvoiceForm'
+
+import addInvoice from '../../../GraphQL/mutation/addInvoice'
 
 const Header = () => {
+  const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false)
   const { state, dispatch } = useContext(StateContext)
-
+  const { AddInvoice } = addInvoice()
   const stores = state.stores.map( store => store.name )
 
   const dateToday = new Date().toLocaleDateString(
@@ -16,8 +21,82 @@ const Header = () => {
     }
   )
 
+  const handleOnSelect = (value) => {
+    const selectedStore = state.stores.filter( store => {
+      return store.name === value
+    })
+
+    dispatch({
+      type: "updateSelectedStore",
+      payload: selectedStore[0]
+    })
+  }
+
+  const handleCancel = () => {
+    setVisible(false)
+  }
+
+  const handleSave = (values) => {
+    setLoading(true)
+
+    const productIds = state.cart.map( product => {
+      return product.id
+    })
+
+    AddInvoice({ variables: {
+      invoiceNumber: values.invoiceNumber,
+      storeId: state.selectedStore.id,
+      productIds,
+    }}).then( result => {
+      setTimeout(() => {
+        dispatch({
+          type: "updateCart",
+          payload: []
+        })
+        setVisible(false)
+        setLoading(false)
+      }, 3000)
+    })
+  }
+
+  const { handleSubmit, handleChange, values } = useAddInvoiceForm(handleSave, {
+    invoiceNumber: ""
+  })
+
   return (
     <div className="receipt-container">
+      <div className="action">
+        <Button
+          onClick={() => setVisible(true)}
+          loading={loading}
+          disabled={!(state.cart.length > 0 && state.selectedStore)}
+        >
+          Print<Icon type="printer" />
+        </Button>
+        <Modal
+          title="Add Invoice Number"
+          visible={visible}
+          onOk={handleSubmit}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Return
+            </Button>,
+            <Button key="submit" type="primary" loading={loading} onClick={handleSubmit}>
+              Print<Icon type="printer" />
+            </Button>,
+          ]}
+        >
+          <Input
+            name="invoiceNumber"
+            placeholder="Invoice Number"
+            size="large"
+            onChange={handleChange}
+            value={values.invoiceNumber}
+            required
+          />
+        </Modal>
+      </div>
       <div className="header">
         <h1>Gerald G. Castañeda Marketing</h1>
         <p>Magalang, Pampanga</p>
@@ -38,18 +117,7 @@ const Header = () => {
             filterOption={(inputValue, option) =>
               option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
             }
-            onSelect={
-              (value) => {
-                const selectedStore = state.stores.filter( store => {
-                  return store.name === value
-                })
-
-                dispatch({
-                  type: "updateSelectedStore",
-                  payload: selectedStore[0]
-                })
-              }
-            }
+            onSelect={handleOnSelect}
           />
         </div>
         <div className="details">

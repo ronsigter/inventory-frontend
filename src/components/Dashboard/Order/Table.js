@@ -21,6 +21,16 @@ export default () => {
     })
   }
 
+  const removeItem = (record) => {
+    const cart = state.cart.filter( order => {
+      return order.id !== record.id
+    })
+    dispatch({
+      type: "updateCart",
+      payload: cart
+    })
+  }
+
   const columns = [
     {
       title: 'Quantity',
@@ -64,15 +74,7 @@ export default () => {
       title: '',
       key: 'action',
       render: (text, record) =>
-        <Button type="danger" onClick={() => {
-          const cart = state.cart.filter( order => {
-            return order.id !== record.id
-          })
-          dispatch({
-            type: "updateCart",
-            payload: cart
-          })
-        }}>
+        <Button type="danger" onClick={() => removeItem(record)}>
           <Icon type="delete" />
         </Button>,
       align: 'center',
@@ -92,7 +94,7 @@ export default () => {
       loading={state.loading}
       pagination={{ pageSize: 300 }}
       pagination={false}
-      scroll={{ y: 300 }}
+      scroll={{ y: 280 }}
     />
   )
 }

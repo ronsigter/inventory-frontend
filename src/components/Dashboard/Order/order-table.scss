@@ -3,6 +3,11 @@
     display: flex;
     flex-direction: column;
 
+    .action button {
+      float: right;
+      background-color: #70C040;
+    }
+
     .header {
       @extend .receipt-container;
       align-items: center;

@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 
 import Stocks from './Stocks/'
-import Order from './Order/'
+import Invoices from './Invoices/'
 import DR from './DR/'
 
 const { Header, Content, Footer } = Layout
@@ -38,7 +38,7 @@ const Dashboard = () => {
               style={{ lineHeight: '64px' }}
             >
               <Menu.Item key="stocks" onClick={handleChangeTab}>View Stocks</Menu.Item>
-              <Menu.Item key="order" onClick={handleChangeTab}>View Order</Menu.Item>
+              <Menu.Item key="invoices" onClick={handleChangeTab}>View Invoices</Menu.Item>
               <Menu.Item key="dr" onClick={handleChangeTab}>Process DR</Menu.Item>
               <SubMenu
                 title={
@@ -57,7 +57,7 @@ const Dashboard = () => {
             <div style={{ background: '#fff', padding: 24, height: '100%' }}>
               {
                 currentTab === 'stocks' ? <Stocks/> :
-                currentTab === 'order' ? <Order/> :
+                currentTab === 'invoices' ? <Invoices/> :
                 currentTab === 'dr' ? <DR/> :
                 null
               }
