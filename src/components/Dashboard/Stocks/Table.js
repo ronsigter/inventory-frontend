@@ -6,6 +6,15 @@ import { Table, Button, Icon } from 'antd'
 export default () => {
   const { state, dispatch } = useContext(StateContext)
 
+  const handleAddToCart = (record) => {
+    const cart = state.cart
+    cart.push({...record, orderQuantity: 1})
+    dispatch({
+      type: "updateCart",
+      payload: cart
+    })
+  }
+
   const columns = [
     {
       title: 'Title',
@@ -37,14 +46,11 @@ export default () => {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
-        <Button style={{backgroundColor: "#EFAF41"}} type="primary" onClick={() => {
-          const cart = state.cart
-          cart.push({...record, orderQuantity: 1})
-          dispatch({
-            type: "updateCart",
-            payload: cart
-          })
-        }}>Add to order
+        <Button
+          style={{backgroundColor: "#EFAF41"}}
+          type="primary"
+          onClick={() => handleAddToCart(record)}
+        >Add to order
           <Icon type="shopping-cart" />
         </Button>
       ),
@@ -53,11 +59,15 @@ export default () => {
     }
   ]
 
-  const products = state.products.filter(
-    (product) => {
+  const products = () => {
+    const addedToCart = new Set(state.cart.map( cart => cart.id))
+
+    return state.products
+    .filter( product => {
       return product.title.toLowerCase().indexOf(state.searchTerm.toLowerCase()) !== -1
-    }
-  )
+    })
+    .filter( product => !addedToCart.has(product.id))
+  }
 
   return (
     <div className="table">
@@ -66,7 +76,7 @@ export default () => {
         rowKey="id"
         bordered={true}
         columns={columns}
-        dataSource={products}
+        dataSource={products()}
         loading={state.loading}
         pagination={{ pageSize: 9 }}
       />
