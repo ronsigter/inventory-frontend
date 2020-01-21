@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Input, AutoComplete, Button, Icon, Modal } from 'antd'
 import { StateContext } from '../Context'
 import { useAddInvoiceForm } from '../../../forms/useAddInvoiceForm'
-
+import Document from '../Document/'
 import addInvoice from '../../../GraphQL/mutation/addInvoice'
 
 const Header = () => {
@@ -95,6 +95,7 @@ const Header = () => {
             value={values.invoiceNumber}
             required
           />
+          <Document/>
         </Modal>
       </div>
       <div className="header">

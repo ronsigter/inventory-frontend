@@ -21,7 +21,7 @@ const Order = () => {
   }, [StoresLoading])
 
   return (
-    <div>
+    <div id="divToPrint">
       <Table/>
     </div>
   )

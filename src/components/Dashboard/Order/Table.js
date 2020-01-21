@@ -8,7 +8,6 @@ import { Table, Input, Icon, Button } from 'antd'
 export default () => {
 
   const { state, dispatch } = useContext(StateContext)
-
   const handleQuantityChange = (event, record) => {
     const updatedCart = state.cart.map( order => {
       if(order.id === record.id) {
@@ -92,9 +91,9 @@ export default () => {
       columns={columns}
       dataSource={state.cart}
       loading={state.loading}
-      pagination={{ pageSize: 300 }}
+      pagination={{ pageSize: 10 }}
       pagination={false}
-      scroll={{ y: 280 }}
+      scroll={{ y: 'calc(100vh - 4em)' }}
     />
   )
 }
