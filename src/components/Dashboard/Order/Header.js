@@ -39,14 +39,19 @@ const Header = () => {
   const handleSave = (values) => {
     setLoading(true)
 
-    const productIds = state.cart.map( product => {
-      return product.id
+    const products = state.cart.map( product => {
+      return ({
+        item: product.id,
+        quantity: product.orderQuantity
+      })
     })
 
     AddInvoice({ variables: {
       invoiceNumber: values.invoiceNumber,
       storeId: state.selectedStore.id,
-      productIds,
+      salesPersonId: state.selectedSalesPerson.id,
+      deliveryPersonId: state.selectedDeliveryPerson.id,
+      products,
     }}).then( result => {
       setTimeout(() => {
         dispatch({

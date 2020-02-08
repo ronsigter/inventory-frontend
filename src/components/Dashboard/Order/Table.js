@@ -11,7 +11,7 @@ export default () => {
   const handleQuantityChange = (event, record) => {
     const updatedCart = state.cart.map( order => {
       if(order.id === record.id) {
-        return {...record, orderQuantity: event.target.value}
+        return {...record, orderQuantity: parseInt(event.target.value)}
       } else return order
     })
     dispatch({

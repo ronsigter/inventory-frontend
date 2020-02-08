@@ -19,6 +19,12 @@ export default () => {
       dataIndex: 'user.firstName',
       key: 'user.firstName',
       align: 'center'
+    },
+    {
+      title: 'Total',
+      dataIndex: 'user.firstName',
+      key: 'user.firstName',
+      align: 'center'
     }
   ]
 
