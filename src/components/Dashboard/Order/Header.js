@@ -42,14 +42,15 @@ const Header = () => {
     const products = state.cart.map( product => {
       return ({
         item: product.id,
-        quantity: product.orderQuantity,
-        price: product.price
+        quantity: product.orderQuantity
       })
     })
 
     AddInvoice({ variables: {
       invoiceNumber: values.invoiceNumber,
       storeId: state.selectedStore.id,
+      salesPersonId: state.selectedSalesPerson.id,
+      deliveryPersonId: state.selectedDeliveryPerson.id,
       products,
     }}).then( result => {
       setTimeout(() => {

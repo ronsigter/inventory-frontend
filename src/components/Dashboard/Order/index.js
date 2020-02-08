@@ -5,10 +5,14 @@ import { StateContext } from '../Context'
 import Table from './Table'
 
 import getAllStores from '../../../GraphQL/query/getAllStores'
-
+import getAllSalesPeople from '../../../GraphQL/query/getAllSalesPeople'
+import getAllDeliveryPeople from '../../../GraphQL/query/getAllDeliveryPeople'
 
 const Order = () => {
   const { Stores, StoresLoading } = getAllStores()
+  const { SalesPeople, SalesPeopleLoading } = getAllSalesPeople()
+  const { DeliveryPeople, DeliveryPeopleLoading } = getAllDeliveryPeople()
+
   const { dispatch } = useContext(StateContext)
 
   useEffect(() => {
@@ -19,6 +23,25 @@ const Order = () => {
       })
     }
   }, [StoresLoading])
+
+
+  useEffect(() => {
+    if(!SalesPeopleLoading){
+      dispatch({
+        type: "updateSalesPeople",
+        payload: SalesPeople
+      })
+    }
+  }, [SalesPeopleLoading])
+
+  useEffect(() => {
+    if(!DeliveryPeopleLoading){
+      dispatch({
+        type: "updateDeliveryPeople",
+        payload: DeliveryPeople
+      })
+    }
+  }, [DeliveryPeopleLoading])
 
   return (
     <div id="divToPrint">

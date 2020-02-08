@@ -4,16 +4,16 @@ import { StateContext } from '../../Context'
 
 export const DeliveryPerson = () => {
   const { state, dispatch } = useContext(StateContext)
-  const stores = state.stores.map( store => store.name )
+  const deliveryPeople = state.deliveryPeople.map( person => `${person.firstName} ${person.lastName}` )
 
   const handleOnSelect = (value) => {
-    const selectedStore = state.stores.filter( store => {
-      return store.name === value
+    const selectedDeliveryPerson = state.deliveryPeople.filter( person => {
+      return `${person.firstName} ${person.lastName}` === value
     })
 
     dispatch({
-      type: "updateSelectedStore",
-      payload: selectedStore[0]
+      type: "updateSelectedDeliveryPerson",
+      payload: selectedDeliveryPerson[0]
     })
   }
 
@@ -21,7 +21,7 @@ export const DeliveryPerson = () => {
     <>
       <label>Delivery Person: </label>
       <AutoComplete
-        dataSource={stores}
+        dataSource={deliveryPeople}
         style={{ width: "70%" }}
         placeholder="Choose delivery person"
         filterOption={(inputValue, option) =>
