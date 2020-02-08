@@ -16,9 +16,12 @@ query Invoices{
       name
       address
     }
-    products{
+    orders{
       id
-      title
+      product
+      quantityBought
+      price
+      total
     }
   }
 }

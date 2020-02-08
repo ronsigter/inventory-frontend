@@ -3,8 +3,8 @@ import { useMutation } from '@apollo/react-hooks'
 import client from '../../config/apolloClient'
 
 export const ADD_INVOICE = gql`
-mutation createInvoice($invoiceNumber: String!, $storeId: ID!, $productIds: [ID!]!){
-  createInvoice(invoiceNumber: $invoiceNumber, storeId: $storeId, productIds: $productIds){
+mutation createInvoice($invoiceNumber: String!, $storeId: ID!, $products: [OrderForm!]!){
+  createInvoice(invoiceNumber: $invoiceNumber, storeId: $storeId, products: $products){
     id
     user{
       id
@@ -15,9 +15,12 @@ mutation createInvoice($invoiceNumber: String!, $storeId: ID!, $productIds: [ID!
       name
       address
     }
-    products{
+    orders{
       id
-      title
+      product
+      quantityBought
+      price
+      total
     }
   }
 }
